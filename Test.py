@@ -6,7 +6,7 @@ import math
 class Particle:
     def __init__(self):
         self.angle = math.pi/3
-        self.speed = 5
+        self.speed = 15
         self.colour = (0,0,0)
         self.x = 20
         self.y = 20

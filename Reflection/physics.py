@@ -35,7 +35,6 @@ class Physics(object):
                 movingObject.angle =  - movingObject.angle
             elif movingObject.y >= self.height:
                 movingObject.angle = math.pi - movingObject.angle
-                print(movingObject.angle)
             elif movingObject.y <= 0:
                 movingObject.angle = math.pi - movingObject.angle
                     
