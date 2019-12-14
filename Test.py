@@ -1,15 +1,18 @@
 import pygame
 from pygame.locals import *
 from Reflection.physics import Physics
+from PhysicsObject import PhysicsObject
 import math
 
-class Particle:
+class Particle(PhysicsObject):
+
     def __init__(self):
         self.angle = math.pi/3
         self.speed = 15
         self.colour = (0,0,0)
         self.x = 20
         self.y = 20
+        super().__init__(self.x, self.y, self.angle, self.speed, False)
 
     def display(self):
         pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), 5, 1)
