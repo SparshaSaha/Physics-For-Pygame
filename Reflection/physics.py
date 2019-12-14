@@ -29,19 +29,20 @@ class Physics(object):
     
     def __performCollisionsWithBoundaries__(self):
         for movingObject in self.movingObjects:
-            for _ in self.boundaries:
-                if movingObject.x >= self.width:
-                    movingObject.angle = - movingObject.angle
-                elif movingObject.x <= 0:
-                    movingObject.angle =  - movingObject.angle
-                elif movingObject.y >= self.height:
-                    movingObject.angle = math.pi - movingObject.angle
-                elif movingObject.y <= 0:
-                    movingObject.angle = math.pi - movingObject.angle
+            if movingObject.x >= self.width:
+                movingObject.angle = - movingObject.angle
+            elif movingObject.x <= 0:
+                movingObject.angle =  - movingObject.angle
+            elif movingObject.y >= self.height:
+                movingObject.angle = math.pi - movingObject.angle
+                print(movingObject.angle)
+            elif movingObject.y <= 0:
+                movingObject.angle = math.pi - movingObject.angle
+                    
     
     def performReflectionPhysics(self):
-        self.__updateCoordinates__()
         self.__performCollisionsWithBoundaries__()
+        self.__updateCoordinates__()
                 
 
 
