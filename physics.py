@@ -30,6 +30,6 @@ class Physics(object):
             movingObject.y -= math.cos(movingObject.velocityVector.angle) * movingObject.velocityVector.magnitude
     
     def performPhysics(self):
-        performCollisionsWithBoundaries(self.movingObjects, self.height, self.width)
         addGravity(self.movingObjects)
+        performCollisionsWithBoundaries(self.movingObjects, self.height, self.width)
         self.__updateCoordinates__()
