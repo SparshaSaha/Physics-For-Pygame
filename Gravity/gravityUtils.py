@@ -1,4 +1,8 @@
 import math
+from Vector import Vector
 
-def __addVectors__(vector1, vector2):
-    pass
+def addGravity(gameObjects):
+    gravity = Vector(math.pi, 0.05)
+    for gameObject in gameObjects:
+        gameObject.velocityVector = gameObject.velocityVector.addVector(gravity)
+

@@ -1,5 +1,6 @@
 import math
 from Reflection.reflectionUtils import performCollisionsWithBoundaries
+from Gravity.gravityUtils import addGravity
 
 class Physics(object):
 
@@ -25,11 +26,12 @@ class Physics(object):
 
     def __updateCoordinates__(self):
         for movingObject in self.movingObjects:
-            movingObject.x += math.sin(movingObject.angle) * movingObject.speed
-            movingObject.y -= math.cos(movingObject.angle) * movingObject.speed
+            movingObject.x += math.sin(movingObject.velocityVector.angle) * movingObject.velocityVector.magnitude
+            movingObject.y -= math.cos(movingObject.velocityVector.angle) * movingObject.velocityVector.magnitude
     
-    def performReflectionPhysics(self):
+    def performPhysics(self):
         performCollisionsWithBoundaries(self.movingObjects, self.height, self.width)
+        addGravity(self.movingObjects)
         self.__updateCoordinates__()
                 
 

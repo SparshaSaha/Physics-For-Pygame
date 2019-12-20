@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from physics import Physics
 from PhysicsObject import PhysicsObject
-from 
+from Vector import Vector
 import math
 
 class Particle(PhysicsObject):
@@ -13,7 +13,8 @@ class Particle(PhysicsObject):
         self.colour = (0,0,0)
         self.x = 20
         self.y = 20
-        super().__init__(self.x, self.y, self.angle, self.speed, 5,  False)
+        self.velocityVector = Vector(self.angle, self.speed)
+        super().__init__(self.x, self.y, self.velocityVector, 5,  False)
 
     def display(self):
         pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), 5, 5)
