@@ -10,4 +10,3 @@ def performCollisionsWithBoundaries(movingObjects, height, width):
             movingObject.angle = math.pi - movingObject.angle
         elif movingObject.y <= 0:
             movingObject.angle = math.pi - movingObject.angle
-            
