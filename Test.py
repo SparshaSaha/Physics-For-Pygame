@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from Reflection.physics import Physics
+from physics import Physics
 from PhysicsObject import PhysicsObject
 import math
 
@@ -34,10 +34,8 @@ par = Particle()
 p = Physics(600, 600)
 p.registerMovingObject(par)
 c = True
-clock = pygame.time.Clock()
 
 while c:
-    clock.tick(80)
     for event in pygame.event.get():
         if event.type == QUIT or event.type == KEYDOWN:
             c = False

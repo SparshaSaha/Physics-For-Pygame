@@ -1,4 +1,5 @@
 import math
+from Reflection.reflectionUtils import performCollisionsWithBoundaries
 
 class Physics(object):
 
@@ -27,20 +28,8 @@ class Physics(object):
             movingObject.x += math.sin(movingObject.angle) * movingObject.speed
             movingObject.y -= math.cos(movingObject.angle) * movingObject.speed
     
-    def __performCollisionsWithBoundaries__(self):
-        for movingObject in self.movingObjects:
-            if movingObject.x >= self.width:
-                movingObject.angle = - movingObject.angle
-            elif movingObject.x <= 0:
-                movingObject.angle =  - movingObject.angle
-            elif movingObject.y >= self.height:
-                movingObject.angle = math.pi - movingObject.angle
-            elif movingObject.y <= 0:
-                movingObject.angle = math.pi - movingObject.angle
-                    
-    
     def performReflectionPhysics(self):
-        self.__performCollisionsWithBoundaries__()
+        performCollisionsWithBoundaries(self.movingObjects, self.height, self.width)
         self.__updateCoordinates__()
                 
 
