@@ -33,7 +33,3 @@ class Physics(object):
         performCollisionsWithBoundaries(self.movingObjects, self.height, self.width)
         addGravity(self.movingObjects)
         self.__updateCoordinates__()
-                
-
-
-    
