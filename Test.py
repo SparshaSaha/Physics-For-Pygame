@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 from physics import Physics
-from PhysicsObject import PhysicsObject
+from physicsObject import PhysicsObject
 from Vector import Vector
 import math
 
@@ -14,11 +14,11 @@ class Particle(PhysicsObject):
         self.x = 20
         self.y = 20
         self.velocityVector = Vector(self.angle, self.speed)
-        super().__init__(self.x, self.y, self.velocityVector, 5,  False)
+        super().__init__(self.x, self.y, self.velocityVector, 5,  False, elasticity=0.99)
 
     def display(self):
-        pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), 5, 5)
-    
+        pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), 1, 0)
+
 
 pygame.init()
 flags = pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.FULLSCREEN
@@ -41,9 +41,8 @@ while c:
     for event in pygame.event.get():
         if event.type == QUIT or event.type == KEYDOWN:
             c = False
-    p.performReflectionPhysics()
+    p.performPhysics()
     screen.blit(background, (0,0))
     par.display()
     pygame.display.flip()
 pygame.quit()
-
