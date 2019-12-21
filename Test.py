@@ -10,14 +10,14 @@ class Particle(PhysicsObject):
     def __init__(self):
         self.angle = math.pi/3
         self.speed = 5
-        self.colour = (0,0,0)
+        self.colour = (0, 0, 0)
         self.x = 20
         self.y = 20
         self.velocityVector = Vector(self.angle, self.speed)
-        super().__init__(self.x, self.y, self.velocityVector, 5,  False, elasticity=0.99)
+        super().__init__(self.x, self.y, self.velocityVector, 5,  False, elasticity=0.7)
 
     def display(self):
-        pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), 1, 0)
+        pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), 5, 0)
 
 
 pygame.init()
