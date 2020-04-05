@@ -1,5 +1,5 @@
 import math
-from Collision.collisionUtils import performCollisionsWithBoundaries
+from Collision.collisionUtils import performCollisionsWithBoundaries, performObjectToObjectCollision
 from Gravity.gravityUtils import addGravity
 
 
@@ -25,15 +25,19 @@ class Physics(object):
         if movingObject in self.movingObjects:
             self.movingObjects.remove(movingObject)
 
-    def __updateCoordinates__(self):
-        for movingObject in self.movingObjects:
-            movingObject.x += math.sin(movingObject.velocityVector.angle) * \
-                movingObject.velocityVector.magnitude
-            movingObject.y -= math.cos(movingObject.velocityVector.angle) * \
-                movingObject.velocityVector.magnitude
+    def __updateCoordinates__(self, movingObject):
+        movingObject.x += math.sin(movingObject.velocityVector.angle) * \
+            movingObject.velocityVector.magnitude
+        movingObject.y -= math.cos(movingObject.velocityVector.angle) * \
+            movingObject.velocityVector.magnitude
 
     def performPhysics(self):
-        addGravity(self.movingObjects)
-        performCollisionsWithBoundaries(
-            self.movingObjects, self.height, self.width)
-        self.__updateCoordinates__()
+        for i in range(0, len(self.movingObjects)):
+            movingObject = self.movingObjects[i]
+            addGravity(movingObject)
+            performCollisionsWithBoundaries(
+                movingObject, self.height, self.width)
+            if movingObject.isCollidable:
+                performObjectToObjectCollision(
+                    self.movingObjects, movingObject, i)
+            self.__updateCoordinates__(movingObject)

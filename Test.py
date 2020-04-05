@@ -2,22 +2,25 @@ import pygame
 from pygame.locals import *
 from physics import Physics
 from physicsObject import PhysicsObject
-from Vector import Vector
+from vector import Vector
 import math
+
 
 class Particle(PhysicsObject):
 
-    def __init__(self):
-        self.angle = math.pi/3
+    def __init__(self, x, y, angle):
+        self.angle = angle
         self.speed = 5
         self.colour = (0, 0, 0)
-        self.x = 20
-        self.y = 20
+        self.x = x
+        self.y = y
         self.velocityVector = Vector(self.angle, self.speed)
-        super().__init__(self.x, self.y, self.velocityVector, 5,  False, elasticity=0.7)
+        super().__init__(self.x, self.y, self.velocityVector,
+                         10,  False, False, elasticity=0.9)
 
     def display(self):
-        pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), 5, 0)
+        pygame.draw.circle(screen, self.colour,
+                           (int(self.x), int(self.y)), 10, 0)
 
 
 pygame.init()
@@ -30,11 +33,15 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((250, 250, 250))
 
-screen.blit(background, (0,0))
+screen.blit(background, (0, 0))
 pygame.display.flip()
-par = Particle()
+par = Particle(20, 20, math.pi/3)
+par1 = Particle(50, 50, math.pi/6)
+par2 = Particle(250, 350, math.pi/7)
 p = Physics(600, 600)
 p.registerMovingObject(par)
+p.registerMovingObject(par1)
+p.registerMovingObject(par2)
 c = True
 
 while c:
@@ -42,7 +49,9 @@ while c:
         if event.type == QUIT or event.type == KEYDOWN:
             c = False
     p.performPhysics()
-    screen.blit(background, (0,0))
+    screen.blit(background, (0, 0))
     par.display()
+    par1.display()
+    par2.display()
     pygame.display.flip()
 pygame.quit()
